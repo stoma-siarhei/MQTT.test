@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MQTT.test", "MQTT.test\MQTT.test.vcxproj", "{012CBE63-5B48-4893-AF79-FEB2FF159A97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DES", "DES", "{36A0803E-9E7A-4A0D-8E7F-2E8DAD288C52}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DES", "DES\DES.vcxproj", "{3818547B-6C3D-47C7-B5A9-7F154300C514}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FD2CC315-4DC1-4051-8D59-D52A52086B58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Debug|x64.ActiveCfg = Debug|x64
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Debug|x64.Build.0 = Debug|x64
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Debug|x86.ActiveCfg = Debug|Win32
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Debug|x86.Build.0 = Debug|Win32
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Release|x64.ActiveCfg = Release|x64
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Release|x64.Build.0 = Release|x64
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Release|x86.ActiveCfg = Release|Win32
+		{012CBE63-5B48-4893-AF79-FEB2FF159A97}.Release|x86.Build.0 = Release|Win32
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Debug|x64.ActiveCfg = Debug|x64
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Debug|x64.Build.0 = Debug|x64
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Debug|x86.ActiveCfg = Debug|Win32
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Debug|x86.Build.0 = Debug|Win32
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Release|x64.ActiveCfg = Release|x64
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Release|x64.Build.0 = Release|x64
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Release|x86.ActiveCfg = Release|Win32
+		{3818547B-6C3D-47C7-B5A9-7F154300C514}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3818547B-6C3D-47C7-B5A9-7F154300C514} = {36A0803E-9E7A-4A0D-8E7F-2E8DAD288C52}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CD1BC78-B5CA-4C02-BB4C-8C1B2A02876A}
+	EndGlobalSection
+EndGlobal
