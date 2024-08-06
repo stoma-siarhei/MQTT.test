@@ -30,6 +30,8 @@ public:
 
     unsigned char* decode();
 
+    size_t size() const;
+
     unsigned int b64(char a_char)
     {
         if (a_char >= 0x30 && a_char <= 0x39)

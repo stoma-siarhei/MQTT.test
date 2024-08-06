@@ -81,4 +81,9 @@ unsigned char* Base64::decode()
     return buffer;
 }
 
+size_t Base64::size() const
+{
+    return buffer_size;
+}
+
 } // namespace crypto
