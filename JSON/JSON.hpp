@@ -17,7 +17,7 @@ namespace ss::lib
 
 struct c_json
 {
-#ifdef _UNICODE
+#if defined(_UNICODE) && !defined(_USE_CHAR)
 	static wchar_t open_record;
 	static wchar_t close_record;
 
@@ -30,16 +30,16 @@ struct c_json
 	static wchar_t quota_2;
 #else
 	static char open_record;
-	static char cose_record;
+	static char close_record;
 
 	static char open_array;
-	static char cose_array;
+	static char close_array;
 
-	static char deimiter;
+	static char delimiter;
 
 	static char quota_1;
 	static char quota_2;
-#endif // _UNICODE
+#endif // defined(_UNICODE) && !defined(_USE_CHAR)
 }; // struct c_json
 
 namespace parse 

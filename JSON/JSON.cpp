@@ -6,7 +6,7 @@ using namespace std;
 namespace ss::lib
 {
 
-#ifdef _UNICODE
+#if defined(_UNICODE) && !defined(_USE_CHAR)
 wchar_t c_json::open_record = L'{';
 wchar_t c_json::close_record = L'}';
 
@@ -19,16 +19,16 @@ wchar_t c_json::quota_1 = L'\"';
 wchar_t c_json::quota_2 = L'\'';
 #else
 char c_json::open_record = '{';
-char c_json::cose_record = '}';
+char c_json::close_record = '}';
 
 char c_json::open_array = '[';
-char c_json::cose_array = ']';
+char c_json::close_array = ']';
 
-char c_json::deimiter = ':';
+char c_json::delimiter = ':';
 
 char c_json::quota_1 = '\"';
 char c_json::quota_2 = '\'';
-#endif // _UNICODE
+#endif // defined(_UNICODE) && !defined(_USE_CHAR)
 
 }
 
