@@ -32,4 +32,15 @@
 *.app
 
 .vs
+
 !packages
+
+!paho-mqtt3a.dll
+!paho-mqtt3as.dll
+!paho-mqtt3c.dll
+!paho-mqtt3cs.dll
+
+!paho-mqtt3a.lib
+!paho-mqtt3as.lib
+!paho-mqtt3c.lib
+!paho-mqtt3cs.lib
