@@ -1,0 +1,154 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/paho-mqtt-x64-windows-1.3.13#1-58fe50bb-bc8f-4fe9-b3bb-99df8ecd1fa0",
+  "name": "paho-mqtt:x64-windows@1.3.13#1 a7c47cc95be66c4c7aa2c4a99a46221bdb09bcb563f1f81e660b945df31aea89",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-2024-08-01-fd884a0d390d12783076341bd43d77c3a6a15658"
+    ],
+    "created": "2024-08-07T00:57:51Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-2"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-3"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-2",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-3",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "paho-mqtt",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "1.3.13#1",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/paho-mqtt",
+      "homepage": "https://github.com/eclipse/paho.mqtt.c",
+      "licenseConcluded": "EPL-2.0",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "Paho project provides open-source client implementations of MQTT and MQTT-SN messaging protocols aimed at new, existing, and emerging applications for the Internet of Things",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "paho-mqtt:x64-windows",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "a7c47cc95be66c4c7aa2c4a99a46221bdb09bcb563f1f81e660b945df31aea89",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "EPL-2.0",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    },
+    {
+      "SPDXID": "SPDXRef-resource-1",
+      "name": "eclipse/paho.mqtt.c",
+      "downloadLocation": "git+https://github.com/eclipse/paho.mqtt.c@v1.3.13",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "0f436470bcff224461ed3227c8db10914f84bc2dcf76e51b55d4a78b80abaa4e636ac8f7a20e517524625888335c738e975283e5d573ae8d59147aa4de7963fc"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "fileName": "./D:/Project/vcpkg/ports/paho-mqtt/fix-ODR-libuuid-linux.patch",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f67c9a2ece51c0c36399a9717e85e47c3f0ccf238b7f14a680d17fa3cfbe851c"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./D:/Project/vcpkg/ports/paho-mqtt/fix-unresolvedsymbol-arm.patch",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d99ebb089a988de02dd62e5accd1a1e2047790083da62a32b2f6e2b73ef8c943"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./D:/Project/vcpkg/ports/paho-mqtt/portfile.cmake",
+      "SPDXID": "SPDXRef-file-2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "48fb57bff3996b6e9a6069b643320dff501680a68761899ba793ded8895c0718"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./D:/Project/vcpkg/ports/paho-mqtt/vcpkg.json",
+      "SPDXID": "SPDXRef-file-3",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "9840b11bfd4251f9ac9aef54b9f1805d016d927b298a7a6b70e79064e6c81c59"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}
