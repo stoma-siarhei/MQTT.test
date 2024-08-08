@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;paho-mqtt3c.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(BUILD_PATH)\$(SolutionName)\lib\base64\$(Configuration)_$(Platform)\;$(BUILD_PATH)\$(SolutionName)\lib\DES\$(Configuration)_$(Platform)\;$(SolutionDir)packages\paho-mqtt_x64-windows\$(Configuration)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -120,7 +120,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;paho-mqtt3c.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(BUILD_PATH)\$(SolutionName)\lib\base64\$(Configuration)_$(Platform)\;$(BUILD_PATH)\$(SolutionName)\lib\DES\$(Configuration)_$(Platform)\;$(SolutionDir)packages\paho-mqtt_x64-windows\$(Configuration)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -137,7 +137,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;paho-mqtt3c.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(BUILD_PATH)\$(SolutionName)\lib\base64\$(Configuration)_$(Platform)\;$(BUILD_PATH)\$(SolutionName)\lib\DES\$(Configuration)_$(Platform)\;$(SolutionDir)packages\paho-mqtt_x64-windows\$(Configuration)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -158,7 +158,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;paho-mqtt3c.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>base64.lib;DES.lib;paho-mqtt3a.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(BUILD_PATH)\$(SolutionName)\lib\base64\$(Configuration)_$(Platform)\;$(BUILD_PATH)\$(SolutionName)\lib\DES\$(Configuration)_$(Platform)\;$(SolutionDir)packages\paho-mqtt_x64-windows\$(Configuration)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
