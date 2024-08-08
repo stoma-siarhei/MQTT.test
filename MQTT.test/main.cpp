@@ -1,5 +1,8 @@
 #include "pch.h"
 
+#include "client.h"
+#include "server.h"
+
 
 using namespace std;
 

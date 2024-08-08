@@ -6,8 +6,11 @@
 #include <iomanip>
 #include <string>
 #include <string_view>
+#include <exception>
 
 #include <stdint.h>
+
+#include <Windows.h>
 
 #include "base64.h"
 #include "DES.h"
