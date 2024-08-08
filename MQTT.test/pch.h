@@ -9,6 +9,9 @@
 
 #include <stdint.h>
 
+#include "base64.h"
+#include "DES.h"
+#include "MQTTAsync.h"
 #include "MQTTClient.h"
 
 
