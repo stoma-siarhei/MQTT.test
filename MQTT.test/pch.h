@@ -6,7 +6,10 @@
 #include <iomanip>
 #include <string>
 #include <string_view>
+#include <list>
+#include <type_traits>
 #include <exception>
+#include <functional>
 
 #include <stdint.h>
 

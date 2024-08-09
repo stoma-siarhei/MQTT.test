@@ -44,5 +44,8 @@
     <ClInclude Include="mqtt_impl.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="default.param.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

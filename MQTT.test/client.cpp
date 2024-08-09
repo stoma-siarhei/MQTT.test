@@ -1,109 +1,91 @@
 #include "client.h"
 
 
-/*
-#define ADDRESS "tcp://mqtt.eclipseprojects.io:1883"
-#define CLIENTID "ExampleClientPub"
-#define TOPIC "MQTT Examples"
-#define PAYLOAD "Hello World!"
-#define QOS 1
-#define TIMEOUT 10000L
-
-MQTTClient_deliveryToken deliveredtoken;
-
-void delivered(void *context, MQTTClient_deliveryToken dt)
+namespace mqtt::publication
 {
- printf("Message with token value %d delivery confirmed\n", dt);
- deliveredtoken = dt;
+
+publisher::publisher()
+    : publisher(c_address, c_client_id)
+{
 }
 
-int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
+publisher::publisher(const char* addr) 
+    : publisher(addr, c_client_id)
 {
- printf("Message arrived\n");
- printf(" topic: %s\n", topicName);
- printf(" message: %.*s\n", message->payloadlen, (char*)message->payload);
-    MQTTClient_freeMessage(&message);
-    MQTTClient_free(topicName);
-    return 1;
 }
 
-void connlost(void *context, char *cause)
+publisher::publisher(const string_view addr) 
+    : publisher(addr.data())
 {
- printf("\nConnection lost\n");
- printf(" cause: %s\n", cause);
 }
 
-int main(int argc, char* argv[])
+publisher::publisher(const char* addr, const char* id) 
+    : mqtt_impl(addr, id)
 {
-    MQTTClient client;
-    MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
-    MQTTClient_message pubmsg = MQTTClient_message_initializer;
-    MQTTClient_deliveryToken token;
-    int rc;
-
-    if ((rc = MQTTClient_create(&client, ADDRESS, CLIENTID,
-        MQTTCLIENT_PERSISTENCE_NONE, NULL)) != MQTTCLIENT_SUCCESS)
+    if (auto r = MQTTClient_setCallbacks(get(), nullptr, publisher::connection_lost, publisher::message_arrived, publisher::delivery_complete); r != MQTTCLIENT_SUCCESS)
     {
- printf("Failed to create client, return code %d\n", rc);
- rc = EXIT_FAILURE;
-        goto exit;
+        throw system_error(error_code(r, system_category()), "Error setup callback function");
     }
-
-    if ((rc = MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered)) != MQTTCLIENT_SUCCESS)
+#if MQTT_VER == 5
+#else
+    if (auto r = MQTTClient_connect(get(), &options()); r != MQTTCLIENT_SUCCESS) 
     {
- printf("Failed to set callbacks, return code %d\n", rc);
-        rc = EXIT_FAILURE;
-        goto destroy_exit;
+        throw system_error(error_code(r, system_category()), "Failed connect");
     }
+    m_connected = true;
+#endif // MQTT_VER == 5
+}
 
-    conn_opts.keepAliveInterval = 20;
-    conn_opts.cleansession = 1;
-    if ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
-    {
-        printf("Failed to connect, return code %d\n", rc);
-        rc = EXIT_FAILURE;
-        goto destroy_exit;
-    }
+publisher::publisher(const string_view addr, const string_view id) 
+    : publisher(addr.data(), id.data())
+{
+}
 
-    pubmsg.payload = PAYLOAD;
-    pubmsg.payloadlen = (int)strlen(PAYLOAD);
-    pubmsg.qos = QOS;
-    pubmsg.retained = 0;
-    deliveredtoken = 0;
-    if ((rc = MQTTClient_publishMessage(client, TOPIC, &pubmsg, &token)) != MQTTCLIENT_SUCCESS)
+publisher::~publisher() noexcept
+{
+    if (m_connected)
+#if MQTT_VER == 5
+        MQTTClient_disconnect5()
+#else
+        MQTTClient_disconnect(get(), c_interval);
+#endif // MQTT_VER == 5
+}
+
+static MQTTClient_deliveryToken token = 0;
+
+void publisher::operator()(const string_view msg) const
+{
+    MQTTClient_message _m = MQTTClient_message_initializer;
+    MQTTClient_deliveryToken _t;
+    _m.payload = (void*)msg.data();
+    _m.payloadlen = msg.size();
+    _m.qos = c_qos;
+    _m.retained = 0;
+    if (auto r = MQTTClient_publishMessage(get(), c_channel_p, &_m, &_t); r != MQTTCLIENT_SUCCESS)
     {
-        printf("Failed to publish message, return code %d\n", rc);
-        rc = EXIT_FAILURE;
+        throw system_error(error_code(r, system_category()), "Error public message");
     }
     else
     {
-        printf("Waiting for publication of %s\n"
-            "on topic %s for client with ClientID: %s\n",
-            PAYLOAD, TOPIC, CLIENTID);
-        while (deliveredtoken != token)
+        while (token != _t)
         {
-                        #if defined(_WIN32)
-                                Sleep(100);
-                        #else
-                                usleep(10000L);
-                        #endif
+            Sleep(1000);
         }
     }
-
-    if ((rc = MQTTClient_disconnect(client, 10000)) != MQTTCLIENT_SUCCESS)
-    {
-        printf("Failed to disconnect, return code %d\n", rc);
-        rc = EXIT_FAILURE;
-    }
-
-destroy_exit:
-    MQTTClient_destroy(&client);
-
-exit:
-    return rc;
 }
-*/
-namespace mqtt::publication
+
+void publisher::connection_lost(void* context, char* cause)
 {
+}
+
+int publisher::message_arrived(void* context, char* topic_name, int topic_len, MQTTClient_message* message)
+{
+    return 0;
+}
+
+void publisher::delivery_complete(void* context, MQTTClient_deliveryToken dt)
+{
+    token = dt;
+}
 
 } // namespace mqtt::publication

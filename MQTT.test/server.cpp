@@ -1,102 +1,82 @@
 #include "server.h"
 
 
-/*
-#define ADDRESS "tcp://mqtt.eclipseprojects.io:1883"
-#define CLIENTID "ExampleClientSub"
-#define TOPIC "MQTT Examples"
-#define PAYLOAD "Hello World!"
-#define QOS 1
-#define TIMEOUT 10000L
-
-volatile MQTTClient_deliveryToken deliveredtoken;
-
-void delivered(void *context, MQTTClient_deliveryToken dt)
-{
- printf("Message with token value %d delivery confirmed\n", dt);
- deliveredtoken = dt;
-}
-
-int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *message)
-{
- printf("Message arrived\n");
- printf(" topic: %s\n", topicName);
- printf(" message: %.*s\n", message->payloadlen, (char*)message->payload);
-    MQTTClient_freeMessage(&message);
-    MQTTClient_free(topicName);
-    return 1;
-}
-
-void connlost(void *context, char *cause)
-{
- printf("\nConnection lost\n");
- printf(" cause: %s\n", cause);
-}
-
-int main(int argc, char* argv[])
-{
-    MQTTClient client;
-    MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
-    int rc;
-
-    if ((rc = MQTTClient_create(&client, ADDRESS, CLIENTID,
-        MQTTCLIENT_PERSISTENCE_NONE, NULL)) != MQTTCLIENT_SUCCESS)
-    {
- printf("Failed to create client, return code %d\n", rc);
- rc = EXIT_FAILURE;
-        goto exit;
-    }
-
-    if ((rc = MQTTClient_setCallbacks(client, NULL, connlost, msgarrvd, delivered)) != MQTTCLIENT_SUCCESS)
-    {
- printf("Failed to set callbacks, return code %d\n", rc);
- rc = EXIT_FAILURE;
-        goto destroy_exit;
-    }
-
- conn_opts.keepAliveInterval = 20;
- conn_opts.cleansession = 1;
-    if ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
-    {
- printf("Failed to connect, return code %d\n", rc);
-        rc = EXIT_FAILURE;
-        goto destroy_exit;
-    }
-
-    printf("Subscribing to topic %s\nfor client %s using QoS%d\n\n"
-           "Press Q<Enter> to quit\n\n", TOPIC, CLIENTID, QOS);
-    if ((rc = MQTTClient_subscribe(client, TOPIC, QOS)) != MQTTCLIENT_SUCCESS)
-    {
-        printf("Failed to subscribe, return code %d\n", rc);
-        rc = EXIT_FAILURE;
-    }
-    else
-    {
-        int ch;
-        do
-        {
-                ch = getchar();
-        } while (ch!='Q' && ch != 'q');
-
-        if ((rc = MQTTClient_unsubscribe(client, TOPIC)) != MQTTCLIENT_SUCCESS)
-        {
-                printf("Failed to unsubscribe, return code %d\n", rc);
-                rc = EXIT_FAILURE;
-        }
-    }
-
-    if ((rc = MQTTClient_disconnect(client, 10000)) != MQTTCLIENT_SUCCESS)
-    {
-        printf("Failed to disconnect, return code %d\n", rc);
-        rc = EXIT_FAILURE;
-    }
-destroy_exit:
-    MQTTClient_destroy(&client);
-exit:
-    return rc;
-}
-*/
 namespace mqtt::subscription
 {
+
+subscribe::subscribe() 
+	: subscribe(c_address, c_client_id)
+{
+}
+
+subscribe::subscribe(const char* addr) 
+	: subscribe(addr, c_client_id)
+{
+}
+
+subscribe::subscribe(const string_view addr) 
+	: subscribe(addr.data())
+{
+}
+
+subscribe::subscribe(const char* addr, const char* id) 
+	: mqtt_impl(addr, id)
+{
+    if (auto r = MQTTClient_setCallbacks(get(), nullptr, subscribe::connection_lost, subscribe::message_arrived, subscribe::delivery_complete); r != MQTTCLIENT_SUCCESS)
+    {
+        throw system_error(error_code(r, system_category()), "Error setup callback function");
+    }
+    if (auto r = MQTTClient_connect(get(), &options()); r != MQTTCLIENT_SUCCESS)
+    {
+        throw system_error(error_code(r, system_category()), "Failed connect");
+    }
+    m_connected = true;
+}
+
+subscribe::subscribe(const string_view addr, const string_view id) 
+	: subscribe(addr.data(), id.data())
+{
+}
+
+subscribe::~subscribe() noexcept
+{
+    for (auto&& it : m_list_s)
+    {
+        MQTTClient_unsubscribe(get(), it.data());
+    }
+    if (m_connected)
+    {
+        MQTTClient_disconnect(get(), c_interval);
+    }
+}
+
+void subscribe::operator()()
+{
+    operator()(c_channel_s);
+}
+
+void subscribe::operator()(const string_view msg)
+{
+    if (auto r = MQTTClient_subscribe(get(), msg.data(), c_qos); r != MQTTCLIENT_SUCCESS)
+    {
+        string str{ "Error subscribe channel - " };
+        str += c_channel_s;
+        throw system_error(error_code(r, system_category()), str);
+    }
+    m_list_s.push_back(string{ msg });
+}
+
+void subscribe::connection_lost(void* context, char* cause)
+{
+}
+
+int subscribe::message_arrived(void* context, char* topic_name, int topic_len, MQTTClient_message* message)
+{
+	return 0;
+}
+
+void subscribe::delivery_complete(void* context, MQTTClient_deliveryToken dt)
+{
+}
 
 } // namespace mqtt::subscription

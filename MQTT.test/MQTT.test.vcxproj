@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h" />
+    <ClInclude Include="default.param.hpp" />
     <ClInclude Include="mqtt_impl.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="server.h" />
