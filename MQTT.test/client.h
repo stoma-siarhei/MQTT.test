@@ -26,6 +26,8 @@ public:
 	~publisher() noexcept;
 
 	void operator()(const string_view msg) const;
+
+	void operator()(const string_view channel, const string_view msg) const;
 protected:
 	// void MQTTClient_connectionLost(void* context, char* cause);
 	static void connection_lost(void* context, char* cause);

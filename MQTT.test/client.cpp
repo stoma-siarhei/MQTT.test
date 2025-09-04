@@ -55,13 +55,18 @@ static MQTTClient_deliveryToken token = 0;
 
 void publisher::operator()(const string_view msg) const
 {
+    operator()(c_channel_p, msg);
+}
+
+void publisher::operator()(const string_view channel, const string_view msg) const
+{
     MQTTClient_message _m = MQTTClient_message_initializer;
     MQTTClient_deliveryToken _t;
     _m.payload = (void*)msg.data();
     _m.payloadlen = msg.size();
     _m.qos = c_qos;
     _m.retained = 0;
-    if (auto r = MQTTClient_publishMessage(get(), c_channel_p, &_m, &_t); r != MQTTCLIENT_SUCCESS)
+    if (auto r = MQTTClient_publishMessage(get(), channel.data(), &_m, &_t); r != MQTTCLIENT_SUCCESS)
     {
         throw system_error(error_code(r, system_category()), "Error public message");
     }
@@ -69,7 +74,7 @@ void publisher::operator()(const string_view msg) const
     {
         while (token != _t)
         {
-            Sleep(1000);
+            this_thread::sleep_for(chrono::milliseconds(100));
         }
     }
 }

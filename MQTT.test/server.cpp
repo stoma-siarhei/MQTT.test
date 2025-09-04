@@ -50,6 +50,8 @@ subscribe::~subscribe() noexcept
     }
 }
 
+static MQTTClient_deliveryToken token = 0;
+
 void subscribe::operator()()
 {
     operator()(c_channel_s);
@@ -60,7 +62,7 @@ void subscribe::operator()(const string_view msg)
     if (auto r = MQTTClient_subscribe(get(), msg.data(), c_qos); r != MQTTCLIENT_SUCCESS)
     {
         string str{ "Error subscribe channel - " };
-        str += c_channel_s;
+        str += msg;
         throw system_error(error_code(r, system_category()), str);
     }
     m_list_s.push_back(string{ msg });
@@ -72,11 +74,16 @@ void subscribe::connection_lost(void* context, char* cause)
 
 int subscribe::message_arrived(void* context, char* topic_name, int topic_len, MQTTClient_message* message)
 {
+    cout << topic_name << endl;
+    cout << (char*)message->payload << endl;
+    message++;
+    if (message) cout << (char*)message->payload << endl;
 	return 0;
 }
 
 void subscribe::delivery_complete(void* context, MQTTClient_deliveryToken dt)
 {
+    token = dt;
 }
 
 } // namespace mqtt::subscription

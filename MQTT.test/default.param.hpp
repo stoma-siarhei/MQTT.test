@@ -5,11 +5,11 @@
 #include <stdint.h>
 
 
-constexpr const char c_address[] = "tcp://213.33.180.130:1885";
+constexpr const char c_address[] = "tcp://mqtt.eclipseprojects.io:1883";
 
 constexpr const char c_client_id[] = "MQTT.test";
 
-constexpr const uint8_t c_qos{ 1 };
+constexpr const uint8_t c_qos{ 0 };
 
 constexpr const uint32_t c_timeout{ 10000 };
 

@@ -10,6 +10,8 @@
 #include <type_traits>
 #include <exception>
 #include <functional>
+#include <thread>
+#include <chrono>
 
 #include <stdint.h>
 

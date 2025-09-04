@@ -24,24 +24,13 @@ int main(int argc, char** argv)
             vector<uint64_t> v_data(size / 8), v_res(size / 8);
             v_res[v_res.size() - 1] = 0;
             memcpy((void*)v_data.data(), (void*)p_data, size);
-            string key{ "87654321" };
+            string key{ "12345678" };
             uint64_t* p_key = (uint64_t*)key.data();
             crypto::DESCBC des(*p_key, *p_key);
             for (size_t i = 0; auto && it : v_data)
             {
                 if (i == v_res.size()) break;
-                uint64_t b = it;
-                uint8_t* _l = (uint8_t*)&b, * _r = (uint8_t*)&b;
-                for (int i = 0; i < 4; i++)
-                {
-                    std::swap(*(_l + i), *(_r + 7 - i));
-                }
-                b = des.decrypt(b);
-                for (int i = 0; i < 4; i++)
-                {
-                    std::swap(*(_l + i), *(_r + 7 - i));
-                }
-                v_res[i++] = b;
+                v_res[i++] = des.decrypt(it);
             }
             string result{ (char*)&v_res[0] };
             cout << result << endl;
@@ -61,24 +50,13 @@ int main(int argc, char** argv)
             vector<uint64_t> v_data(size / 8), v_res(size / 8);
             v_res[v_res.size() - 1] = 0;
             memcpy((void*)v_data.data(), (void*)p_data, size);
-            string key{ "87654321" };
+            string key{ "12345678" };
             uint64_t* p_key = (uint64_t*)key.data();
             crypto::DESCBC des(*p_key, *p_key);
             for (size_t i = 0; auto && it : v_data)
             {
                 if (i == v_res.size()) break;
-                uint64_t b = it;
-                uint8_t* _l = (uint8_t*)&b, * _r = (uint8_t*)&b;
-                for (int i = 0; i < 4; i++)
-                {
-                    std::swap(*(_l + i), *(_r + 7 - i));
-                }
-                b = des.decrypt(b);
-                for (int i = 0; i < 4; i++)
-                {
-                    std::swap(*(_l + i), *(_r + 7 - i));
-                }
-                v_res[i++] = b;
+                v_res[i++] = des.decrypt(it);
             }
             string result{ (char*)&v_res[0] };
             cout << result << endl;
@@ -98,24 +76,13 @@ int main(int argc, char** argv)
             vector<uint64_t> v_data(size / 8), v_res(size / 8);
             v_res[v_res.size() - 1] = 0;
             memcpy((void*)v_data.data(), (void*)p_data, size);
-            string key{ "87654321" };
+            string key{ "12345678" };
             uint64_t* p_key = (uint64_t*)key.data();
             crypto::DESCBC des(*p_key, *p_key);
             for (size_t i = 0; auto && it : v_data)
             {
                 if (i == v_res.size()) break;
-                uint64_t b = it;
-                uint8_t* _l = (uint8_t*)&b, * _r = (uint8_t*)&b;
-                for (int i = 0; i < 4; i++)
-                {
-                    std::swap(*(_l + i), *(_r + 7 - i));
-                }
-                b = des.decrypt(b);
-                for (int i = 0; i < 4; i++)
-                {
-                    std::swap(*(_l + i), *(_r + 7 - i));
-                }
-                v_res[i++] = b;
+                v_res[i++] = des.decrypt(it);
             }
             string result{ (char*)&v_res[0] };
             cout << result << endl;
